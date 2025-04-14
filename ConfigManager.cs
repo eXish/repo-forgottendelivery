@@ -11,6 +11,8 @@ namespace ForgottenDelivery
 
         public static ConfigEntry<string> packageDrops;
         public static ConfigEntry<string> bigPackageDrops;
+        public static ConfigEntry<string> packageBlacklist;
+        public static ConfigEntry<string> bigPackageBlacklist;
 
         private readonly static string[] itemTypes = { "drone", "orb", "cart", "upgrade", "crystal", "grenade", "melee", "healthpack", "gun", "tracker", "mine", "pocketcart" };
 
@@ -22,6 +24,8 @@ namespace ForgottenDelivery
 
             packageDrops = ForgottenDeliveryMod.instance.Config.Bind("Drop Settings", "packageDrops", "drone;orb;upgrade;crystal;grenade;healthpack;mine", "The item types that can be dropped by a regular package. This setting is case insenstive and you can chain item types with semicolons. All types are listed in the README.");
             bigPackageDrops = ForgottenDeliveryMod.instance.Config.Bind("Drop Settings", "bigPackageDrops", "cart;melee;gun;tracker;pocketcart", "The item types that can be dropped by a big package. This setting is case insenstive and you can chain item types with semicolons. All types are listed in the README.");
+            packageBlacklist = ForgottenDeliveryMod.instance.Config.Bind("Drop Settings", "packageBlacklist", "", "The items that regular packages should be banned from dropping. This setting is case insenstive and you can chain item names with semicolons. Item names should be exactly as they appear in game.");
+            bigPackageBlacklist = ForgottenDeliveryMod.instance.Config.Bind("Drop Settings", "bigPackageBlacklist", "", "The items that big packages should be banned from dropping. This setting is case insenstive and you can chain item names with semicolons. Item names should be exactly as they appear in game.");
         }
 
         public static bool ValidatePackageDrops(bool big)
@@ -88,6 +92,11 @@ namespace ForgottenDelivery
                 }
             }
             return items;
+        }
+
+        public static string[] GetBlacklist(bool big)
+        {
+            return big ? bigPackageBlacklist.Value.ToLower().Split(';') : packageBlacklist.Value.ToLower().Split(';');
         }
     }
 }

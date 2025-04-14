@@ -19,7 +19,7 @@ This mod adds the chance for delivery packages to spawn on each level. These pac
 > - Guns
 > - Trackers
 
-**Note that most items received from these packages are temporary and will disappear after leaving the level.** Items like the power crystals and upgrades will be permanent once used.
+**Note that most items received from these packages are temporary and will disappear after leaving the level.** Items like the energy crystals and upgrades will be permanent once used.
 
 By default a single package has a 50% chance to spawn each level, and a 25% chance to be big. These settings can be changed in the config file. Below are the names of the item types the config file will use for drops:
 
