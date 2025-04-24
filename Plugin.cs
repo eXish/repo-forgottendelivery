@@ -12,7 +12,7 @@ namespace ForgottenDelivery
     {
         const string mGUID = "eXish.ForgottenDelivery";
         const string mName = "ForgottenDelivery";
-        const string mVersion = "1.0.0";
+        const string mVersion = "1.0.2";
 
         readonly Harmony harmony = new Harmony(mGUID);
 

@@ -13,6 +13,7 @@ namespace ForgottenDelivery
         public static ConfigEntry<string> bigPackageDrops;
         public static ConfigEntry<string> packageBlacklist;
         public static ConfigEntry<string> bigPackageBlacklist;
+        public static ConfigEntry<bool> keepItemsAfterLeaving;
 
         private readonly static string[] itemTypes = { "drone", "orb", "cart", "upgrade", "crystal", "grenade", "melee", "healthpack", "gun", "tracker", "mine", "pocketcart" };
 
@@ -26,6 +27,7 @@ namespace ForgottenDelivery
             bigPackageDrops = ForgottenDeliveryMod.instance.Config.Bind("Drop Settings", "bigPackageDrops", "cart;melee;gun;tracker;pocketcart", "The item types that can be dropped by a big package. This setting is case insenstive and you can chain item types with semicolons. All types are listed in the README.");
             packageBlacklist = ForgottenDeliveryMod.instance.Config.Bind("Drop Settings", "packageBlacklist", "", "The items that regular packages should be banned from dropping. This setting is case insenstive and you can chain item names with semicolons. Item names should be exactly as they appear in game.");
             bigPackageBlacklist = ForgottenDeliveryMod.instance.Config.Bind("Drop Settings", "bigPackageBlacklist", "", "The items that big packages should be banned from dropping. This setting is case insenstive and you can chain item names with semicolons. Item names should be exactly as they appear in game.");
+            keepItemsAfterLeaving = ForgottenDeliveryMod.instance.Config.Bind("Drop Settings", "keepItemsAfterLeaving", false, "Whether items dropped by packages are kept after you leave the level or not. If enabled then items dropped will act as if you purchased them from the shop.");
         }
 
         public static bool ValidatePackageDrops(bool big)
