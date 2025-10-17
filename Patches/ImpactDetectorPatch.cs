@@ -21,7 +21,7 @@ namespace ForgottenDelivery.Patches
                 string[] itemBlacklist = ConfigManager.GetBlacklist(bigPack);
                 foreach (Item value in StatsManager.instance.itemDictionary.Values)
                 {
-                    if (itemPools.Contains(value.itemType) && !itemBlacklist.Contains(value.itemName.ToLower()))
+                    if (itemPools.Contains(value.itemType) && !itemBlacklist.Contains(value.itemName.ToLower()) && value.maxAmountInShop >= 1)
                         items.Add(value);
                 }
                 if (items.Count > 0)

@@ -1,3 +1,6 @@
+## ForgottenDelivery [1.0.4]
+- Fixed non-shop items having a chance to drop
+
 ## ForgottenDelivery [1.0.3]
 - Added config settings to change the health of packages
 - Added the tool type as an item drop from big packages
