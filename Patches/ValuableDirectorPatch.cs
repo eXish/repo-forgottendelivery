@@ -19,6 +19,12 @@ namespace ForgottenDelivery.Patches
                 List<ValuableVolume> volumesBig = Object.FindObjectsOfType<ValuableVolume>(includeInactive: false).Where(x => x.VolumeType == ValuableVolume.Type.Wide).ToList();
                 ForgottenDeliveryMod.log.LogInfo($"Found {volumes.Count} suitable volumes for spawning regular packages.");
                 ForgottenDeliveryMod.log.LogInfo($"Found {volumesBig.Count} suitable volumes for spawning big packages.");
+                int hp = ConfigManager.packageHealth.Value;
+                if (hp < 1)
+                    hp = (int)ConfigManager.packageHealth.DefaultValue;
+                int hpBig = ConfigManager.bigPackageHealth.Value;
+                if (hpBig < 1)
+                    hpBig = (int)ConfigManager.bigPackageHealth.DefaultValue;
                 int chance = ConfigManager.spawnChance.Value;
                 if (chance < 0 || chance > 100)
                     chance = (int)ConfigManager.spawnChance.DefaultValue;
@@ -43,7 +49,8 @@ namespace ForgottenDelivery.Patches
                                 swt.PropParent.SetActive(false);
                                 swt.ValuableParent.SetActive(true);
                             }
-                            NetworkPrefabs.SpawnNetworkPrefab("eXDeliveryBoxBig", volumesBig[index].transform.position, volumesBig[index].transform.rotation);
+                            GameObject box = NetworkPrefabs.SpawnNetworkPrefab("eXDeliveryBoxBig", volumesBig[index].transform.position, volumesBig[index].transform.rotation);
+                            box.GetComponent<NotValuableObject>().healthMax = hpBig;
                             volumesBig.Remove(volumesBig[index]);
                             totalSpawnsBig++;
                         }
@@ -56,7 +63,8 @@ namespace ForgottenDelivery.Patches
                                 swt.PropParent.SetActive(false);
                                 swt.ValuableParent.SetActive(true);
                             }
-                            NetworkPrefabs.SpawnNetworkPrefab("eXDeliveryBox", volumes[index].transform.position, volumes[index].transform.rotation);
+                            GameObject box = NetworkPrefabs.SpawnNetworkPrefab("eXDeliveryBox", volumes[index].transform.position, volumes[index].transform.rotation);
+                            box.GetComponent<NotValuableObject>().healthMax = hp;
                             volumes.Remove(volumes[index]);
                             totalSpawns++;
                         }

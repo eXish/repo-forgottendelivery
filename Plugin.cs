@@ -12,7 +12,7 @@ namespace ForgottenDelivery
     {
         const string mGUID = "eXish.ForgottenDelivery";
         const string mName = "ForgottenDelivery";
-        const string mVersion = "1.0.2";
+        const string mVersion = "1.0.3";
 
         readonly Harmony harmony = new Harmony(mGUID);
 
@@ -39,6 +39,10 @@ namespace ForgottenDelivery
                 log.LogWarning($"The value \"{ConfigManager.packageDrops.Value}\" is not valid for setting \"packageDrops\"! The default will be used instead.");
             if (!ConfigManager.ValidatePackageDrops(true))
                 log.LogWarning($"The value \"{ConfigManager.bigPackageDrops.Value}\" is not valid for setting \"bigPackageDrops\"! The default will be used instead.");
+            if (ConfigManager.packageHealth.Value < 1)
+                log.LogWarning($"The value \"{ConfigManager.packageHealth.Value}\" is not valid for setting \"packageHealth\"! The default will be used instead.");
+            if (ConfigManager.bigPackageHealth.Value < 1)
+                log.LogWarning($"The value \"{ConfigManager.bigPackageHealth.Value}\" is not valid for setting \"bigPackageHealth\"! The default will be used instead.");
 
             string modLocation = Info.Location.TrimEnd("ForgottenDelivery.dll".ToCharArray());
             AssetBundle bundle = AssetBundle.LoadFromFile(modLocation + "forgottendelivery");

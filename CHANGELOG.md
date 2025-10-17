@@ -1,3 +1,7 @@
+## ForgottenDelivery [1.0.3]
+- Added config settings to change the health of packages
+- Added the tool type as an item drop from big packages
+
 ## ForgottenDelivery [1.0.2]
 - Added config setting to toggle keeping items dropped by packages
 - Attempt to fix issue of items spawning in walls by adjusting the spawn position and rotation

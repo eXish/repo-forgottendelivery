@@ -15,7 +15,10 @@ namespace ForgottenDelivery
         public static ConfigEntry<string> bigPackageBlacklist;
         public static ConfigEntry<bool> keepItemsAfterLeaving;
 
-        private readonly static string[] itemTypes = { "drone", "orb", "cart", "upgrade", "crystal", "grenade", "melee", "healthpack", "gun", "tracker", "mine", "pocketcart" };
+        public static ConfigEntry<int> packageHealth;
+        public static ConfigEntry<int> bigPackageHealth;
+
+        private readonly static string[] itemTypes = { "drone", "orb", "cart", "upgrade", "crystal", "grenade", "melee", "healthpack", "gun", "tracker", "mine", "pocketcart", "tool" };
 
         public static void Init()
         {
@@ -24,10 +27,13 @@ namespace ForgottenDelivery
             chanceForBigPackage = ForgottenDeliveryMod.instance.Config.Bind("Spawn Settings", "chanceForBigPackage", 25, "How rare it is for a spawned package to be big. Can be set to a minimum of 0 (never) and a maximum of 100 (guaranteed).");
 
             packageDrops = ForgottenDeliveryMod.instance.Config.Bind("Drop Settings", "packageDrops", "drone;orb;upgrade;crystal;grenade;healthpack;mine", "The item types that can be dropped by a regular package. This setting is case insenstive and you can chain item types with semicolons. All types are listed in the README.");
-            bigPackageDrops = ForgottenDeliveryMod.instance.Config.Bind("Drop Settings", "bigPackageDrops", "cart;melee;gun;tracker;pocketcart", "The item types that can be dropped by a big package. This setting is case insenstive and you can chain item types with semicolons. All types are listed in the README.");
+            bigPackageDrops = ForgottenDeliveryMod.instance.Config.Bind("Drop Settings", "bigPackageDrops", "cart;melee;gun;tracker;pocketcart;tool", "The item types that can be dropped by a big package. This setting is case insenstive and you can chain item types with semicolons. All types are listed in the README.");
             packageBlacklist = ForgottenDeliveryMod.instance.Config.Bind("Drop Settings", "packageBlacklist", "", "The items that regular packages should be banned from dropping. This setting is case insenstive and you can chain item names with semicolons. Item names should be exactly as they appear in game.");
             bigPackageBlacklist = ForgottenDeliveryMod.instance.Config.Bind("Drop Settings", "bigPackageBlacklist", "", "The items that big packages should be banned from dropping. This setting is case insenstive and you can chain item names with semicolons. Item names should be exactly as they appear in game.");
             keepItemsAfterLeaving = ForgottenDeliveryMod.instance.Config.Bind("Drop Settings", "keepItemsAfterLeaving", false, "Whether items dropped by packages are kept after you leave the level or not. If enabled then items dropped will act as if you purchased them from the shop.");
+
+            packageHealth = ForgottenDeliveryMod.instance.Config.Bind("Break Settings", "packageHealth", 40, "The health of a regular package. Can be set to a minimum of 1. Packages take 1 damage on a light impact, 3 on a medium impact, and 5 on a heavy impact.");
+            bigPackageHealth = ForgottenDeliveryMod.instance.Config.Bind("Break Settings", "bigPackageHealth", 80, "The health of a big package. Can be set to a minimum of 1. Packages take 1 damage on a light impact, 3 on a medium impact, and 5 on a heavy impact.");
         }
 
         public static bool ValidatePackageDrops(bool big)
@@ -88,8 +94,11 @@ namespace ForgottenDelivery
                     case "mine":
                         items[i] = SemiFunc.itemType.mine;
                         break;
-                    default:
+                    case "pocketcart":
                         items[i] = SemiFunc.itemType.pocket_cart;
+                        break;
+                    default:
+                        items[i] = SemiFunc.itemType.tool;
                         break;
                 }
             }
