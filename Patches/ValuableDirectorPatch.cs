@@ -49,7 +49,7 @@ namespace ForgottenDelivery.Patches
                                 swt.PropParent.SetActive(false);
                                 swt.ValuableParent.SetActive(true);
                             }
-                            GameObject box = NetworkPrefabs.SpawnNetworkPrefab("eXDeliveryBoxBig", volumesBig[index].transform.position, volumesBig[index].transform.rotation);
+                            GameObject box = NetworkPrefabs.SpawnNetworkPrefab(NetworkPrefabs.PrefabRefs["eXDeliveryBoxBig"], volumesBig[index].transform.position, volumesBig[index].transform.rotation);
                             box.GetComponent<NotValuableObject>().healthMax = hpBig;
                             volumesBig.Remove(volumesBig[index]);
                             totalSpawnsBig++;
@@ -63,7 +63,7 @@ namespace ForgottenDelivery.Patches
                                 swt.PropParent.SetActive(false);
                                 swt.ValuableParent.SetActive(true);
                             }
-                            GameObject box = NetworkPrefabs.SpawnNetworkPrefab("eXDeliveryBox", volumes[index].transform.position, volumes[index].transform.rotation);
+                            GameObject box = NetworkPrefabs.SpawnNetworkPrefab(NetworkPrefabs.PrefabRefs["eXDeliveryBox"], volumes[index].transform.position, volumes[index].transform.rotation);
                             box.GetComponent<NotValuableObject>().healthMax = hp;
                             volumes.Remove(volumes[index]);
                             totalSpawns++;

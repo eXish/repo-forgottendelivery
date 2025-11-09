@@ -32,11 +32,11 @@ namespace ForgottenDelivery.Patches
                     else
                         ForgottenDeliveryMod.log.LogInfo($"A regular package was destroyed, spawning a {items[index].name}.");
                     if (SemiFunc.IsMultiplayer())
-                        PhotonNetwork.InstantiateRoomObject("Items/" + items[index].prefab.name, __instance.transform.GetChild(0).position, __instance.transform.GetChild(0).rotation);
+                        PhotonNetwork.InstantiateRoomObject("Items/" + items[index].prefab.PrefabName, __instance.transform.GetChild(0).position, __instance.transform.GetChild(0).rotation);
                     else
-                        Object.Instantiate(items[index].prefab, __instance.transform.GetChild(0).position, __instance.transform.GetChild(0).rotation);
+                        Object.Instantiate(items[index].prefab.Prefab, __instance.transform.GetChild(0).position, __instance.transform.GetChild(0).rotation);
                     if (ConfigManager.keepItemsAfterLeaving.Value)
-                        StatsManager.instance.ItemPurchase(items[index].itemAssetName);
+                        StatsManager.instance.ItemPurchase(items[index].name);
                 }
                 else if (bigPack)
                     ForgottenDeliveryMod.log.LogInfo("A big package was destroyed, but the current drop settings do not allow for an item to be dropped by this package.");

@@ -1,3 +1,6 @@
+## ForgottenDelivery [1.0.5]
+- Updated mod to work on v0.3.0
+
 ## ForgottenDelivery [1.0.4]
 - Fixed non-shop items having a chance to drop
 
