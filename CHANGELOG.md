@@ -1,3 +1,8 @@
+## ForgottenDelivery [1.0.6]
+- Added the staff type as an item drop from regular packages
+- Added the vehicle type as an item drop from big packages
+- Fixed a typo in the config setting descriptions
+
 ## ForgottenDelivery [1.0.5]
 - Updated mod to work on v0.3.0
 
